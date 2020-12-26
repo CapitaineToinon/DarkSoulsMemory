@@ -7,7 +7,25 @@ using System.Threading.Tasks;
 
 namespace DarkSoulsMemory {
     abstract class DarkSoulsMemoryWatcher {
-        public abstract MemoryWatcher<int> InGameTime { get; }
-        public abstract MemoryWatcher<int> CurrentSaveSlot { get; }
+        public MemoryWatcher<int> InGameTime { get; protected set; }
+        public MemoryWatcher<int> CurrentSaveSlot { get; protected set; }
+        public FlagRegionsWatcher BossFlags { get; protected set; }
+        public FlagRegionsWatcher ItemFlags { get; protected set; }
+
+        public void GetInGameTime(Action<int> action)
+        {
+            if (InGameTime != null)
+            {
+                action.Invoke(InGameTime.Current);
+            }
+        }
+
+        public void GetCurrentSaveSlot(Action<int> action)
+        {
+            if (CurrentSaveSlot != null)
+            {
+                action.Invoke(CurrentSaveSlot.Current);
+            }
+        }
     }
 }

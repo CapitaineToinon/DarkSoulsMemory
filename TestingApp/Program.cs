@@ -1,30 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using DarkSoulsMemory;
 
 namespace TestingApp {
     class Program {
+        static Dictionary<Static.Bosses, bool> bosses = Enum.GetValues(typeof(Static.Bosses)).Cast<Static.Bosses>().ToDictionary(key => key, key => false);
+
         static void Main(string[] args)
         {
-            var DarkSouls = new DarkSouls();
-            DarkSouls.OnInGameTimeChanged += DarkSouls_OnInGameTimeChanged;
-            DarkSouls.OnCurrentSaveSlotChanged += DarkSouls_OnCurrentSaveSlotChanged;
+            var darksouls = DarkSouls.GetInstance();
+            darksouls.OnBossDefeated += DarkSouls_OnBossDefeated;
 
             while (true)
             {
-                DarkSouls.Update();
+                darksouls.Update();
+
+                int killed = bosses.Where(boss => boss.Value).Count();
+                Console.WriteLine(string.Format("You've killed {0} out of {1} bosses", killed, bosses.Count));
+
                 Thread.Sleep(1000);
             }
         }
 
-        private static void DarkSouls_OnCurrentSaveSlotChanged(int old, int current)
+        private static void DarkSouls_OnBossDefeated(Static.Bosses boss)
         {
-            Console.WriteLine("Current saveslot index: " + current);
-        }
-
-        private static void DarkSouls_OnInGameTimeChanged(int old, int current)
-        {
-            Console.WriteLine("IGT in ms: " + current);
+            bosses[boss] = true;
         }
     }
 }
