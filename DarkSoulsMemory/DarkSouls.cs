@@ -19,13 +19,16 @@ namespace DarkSoulsMemory {
         public delegate void FlagChangedEventHandler(int flag, bool old, bool current);
         public delegate void BossDefeatedEventHandler(Static.Bosses boss);
         public delegate void ItemPickupEventHandler(int flag);
+        public delegate void QuitoutEventHandler();
         public delegate void OnProcessHooked(Process process);
         public delegate void OnProcessUnHooked();
+
         public event IntChangedEventHandler OnInGameTimeChanged;
         public event IntChangedEventHandler OnCurrentSaveSlotChanged;
         public event FlagChangedEventHandler OnFlagChanged;
         public event BossDefeatedEventHandler OnBossDefeated;
         public event ItemPickupEventHandler OnItemPickup;
+        public event QuitoutEventHandler OnQuitout;
 
         private event OnProcessHooked OnHooked;
 
@@ -57,6 +60,7 @@ namespace DarkSoulsMemory {
             // Listen to various memory changes and fire our own events
             state.InGameTime.OnChanged += InGameTime_OnChanged;
             state.CurrentSaveSlot.OnChanged += CurrentSaveSlot_OnChanged;
+            state.Loaded.OnChanged += Loaded_OnChanged;
             state.BossFlags.OnWatcherDataChanged += BossFlags_OnWatcherDataChanged;
             state.ItemFlags.OnWatcherDataChanged += ItemFlags_OnWatcherDataChanged;
 
@@ -86,16 +90,6 @@ namespace DarkSoulsMemory {
             this.state = null;
         }
 
-        private void BossFlags_OnWatcherDataChanged(FlagRegion region)
-        {
-            RaiseBosses(region, false);
-        }
-
-        private void ItemFlags_OnWatcherDataChanged(FlagRegion region)
-        {
-            RaiseItems(region, false);
-        }
-
         private void InGameTime_OnChanged(int old, int current)
         {
             OnInGameTimeChanged?.Invoke(old, current);
@@ -104,6 +98,30 @@ namespace DarkSoulsMemory {
         private void CurrentSaveSlot_OnChanged(int old, int current)
         {
             OnCurrentSaveSlotChanged?.Invoke(old, current);
+        }
+
+        private void Loaded_OnChanged(int old, int current)
+        {
+            if (current == 0)
+            {
+                state?.GetInGameTime(igt =>
+                {
+                    if (igt == 0)
+                    {
+                        OnQuitout?.Invoke();
+                    }
+                });
+            }
+        }
+
+        private void BossFlags_OnWatcherDataChanged(FlagRegion region)
+        {
+            RaiseBosses(region, false);
+        }
+
+        private void ItemFlags_OnWatcherDataChanged(FlagRegion region)
+        {
+            RaiseItems(region, false);
         }
 
         /// <summary>
@@ -188,6 +206,7 @@ namespace DarkSoulsMemory {
 
             this.state?.InGameTime.Update(this.process);
             this.state?.CurrentSaveSlot.Update(this.process);
+            this.state?.Loaded.Update(this.process);
             this.state?.BossFlags.UpdateAll(this.process);
             this.state?.ItemFlags.UpdateAll(this.process);
         }

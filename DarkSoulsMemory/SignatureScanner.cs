@@ -1,10 +1,6 @@
 ﻿using LiveSplit.ComponentUtil;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DarkSoulsMemory {
     class SignatureScanner : LiveSplit.ComponentUtil.SignatureScanner {

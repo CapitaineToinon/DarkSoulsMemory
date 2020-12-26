@@ -9,6 +9,7 @@ namespace DarkSoulsMemory {
     abstract class DarkSoulsMemoryWatcher {
         public MemoryWatcher<int> InGameTime { get; protected set; }
         public MemoryWatcher<int> CurrentSaveSlot { get; protected set; }
+        public MemoryWatcher<int> Loaded { get; protected set; }
         public FlagRegionsWatcher BossFlags { get; protected set; }
         public FlagRegionsWatcher ItemFlags { get; protected set; }
 

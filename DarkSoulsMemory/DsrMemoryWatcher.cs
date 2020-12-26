@@ -24,6 +24,20 @@ namespace DarkSoulsMemory {
             instructionSize = 7,
         };
 
+        private Target CHR_FOLLOW_CAM = new Target()
+        {
+            SigScan = new SigScanTarget(3, "48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 4E 68 48 8B 05 ?? ?? ?? ?? 48 89 48 60"),
+            offset = 3,
+            instructionSize = 7,
+        };
+
+        private Target CHR_CLASS_WARP = new Target()
+        {
+            SigScan = new SigScanTarget(3, "48 8B 05 ?? ?? ?? ?? 66 0F 7F 80 A0 0B 00 00 0F 28 02 66 0F 7F 80 B0 0B 00 00 C6 80"),
+            offset = 3,
+            instructionSize = 7
+        };
+
         public DsrMemoryWatcher(Process process) : base()
         {
             if (process == null)
@@ -40,19 +54,27 @@ namespace DarkSoulsMemory {
             if (pFlags == IntPtr.Zero)
                 throw new NullReferenceException("Failed to Scan FLAGS");
 
+            IntPtr pLoaded = scanner.ScanRelative(CHR_FOLLOW_CAM.SigScan, CHR_FOLLOW_CAM.offset, CHR_FOLLOW_CAM.instructionSize);
+            if (pLoaded == IntPtr.Zero)
+                throw new NullReferenceException("Failed to Scan CHR_FOLLOW_CAM");
+
+            IntPtr pCurrentSlot = scanner.ScanRelative(CHR_CLASS_WARP.SigScan, CHR_CLASS_WARP.offset, CHR_CLASS_WARP.instructionSize);
+            if (pCurrentSlot == IntPtr.Zero)
+                throw new NullReferenceException("Failed to Scan CHR_CLASS_WARP");
+
             InGameTime = new MemoryWatcher<int>(new DeepPointer(pChrClassBase, 0xA4));
+            CurrentSaveSlot = new MemoryWatcher<int>(new DeepPointer(pCurrentSlot, 0xAA0));
+            Loaded = new MemoryWatcher<int>(new DeepPointer(pLoaded, 0x60, 0x60))
+            {
+                // Pointer not working indicates that player is not loaded
+                FailAction = MemoryWatcher.ReadFailAction.SetZeroOrNull
+            };
 
             new DeepPointer(pFlags, 0).Deref(process, out val);
             pFlags = new IntPtr(val);
 
             BossFlags = FlagRegionsWatcher.From(Flags.Bosses, pFlags);
             ItemFlags = FlagRegionsWatcher.From(Flags.Items, pFlags);
-
-            // todo
-            CurrentSaveSlot = new MemoryWatcher<int>(IntPtr.Zero)
-            {
-                Enabled = false
-            };
         }
     }
 }
