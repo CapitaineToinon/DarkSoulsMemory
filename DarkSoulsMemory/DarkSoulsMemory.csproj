@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DarkSoulsMemory.cs" />
+    <Compile Include="DarkSouls.cs" />
     <Compile Include="DarkSoulsMemoryWatcher.cs" />
     <Compile Include="DsrMemoryWatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

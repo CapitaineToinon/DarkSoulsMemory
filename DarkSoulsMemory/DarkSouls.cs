@@ -43,11 +43,16 @@ namespace DarkSoulsMemory {
             this.state.InGameTime.OnChanged += InGameTime_OnChanged;
             this.state.CurrentSaveSlot.OnChanged += CurrentSaveSlot_OnChanged;
 
+            // Read and trigger events manually as memorywatchers only activate on changed value
+            Update();
+            InGameTime_OnChanged(state.InGameTime.Old, state.InGameTime.Current);
+            CurrentSaveSlot_OnChanged(state.CurrentSaveSlot.Old, state.CurrentSaveSlot.Current);
+
             // stop listening when program closes
             this.process.Exited += (o, sender) =>
             {
-                this.state.InGameTime.OnChanged -= InGameTime_OnChanged;
-                this.state.CurrentSaveSlot.OnChanged -= CurrentSaveSlot_OnChanged;
+                state.InGameTime.OnChanged -= InGameTime_OnChanged;
+                state.CurrentSaveSlot.OnChanged -= CurrentSaveSlot_OnChanged;
                 this.process = null;
                 this.state = null;
             };
