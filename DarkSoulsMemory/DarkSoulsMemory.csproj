@@ -47,11 +47,11 @@
   <ItemGroup>
     <Compile Include="DarkSouls.cs" />
     <Compile Include="DarkSoulsMemoryWatcher.cs" />
-    <Compile Include="SignatureScanner.cs" />
-    <Compile Include="Static.cs" />
+    <Compile Include="Data\Enums.cs" />
+    <Compile Include="Util\SignatureScanner.cs" />
     <Compile Include="DsrMemoryWatcher.cs" />
-    <Compile Include="FlagRegionsWatcher.cs" />
-    <Compile Include="Flags.cs" />
+    <Compile Include="Util\FlagRegionsWatcher.cs" />
+    <Compile Include="Data\Flags.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PtdeMemoryWatcher.cs" />
   </ItemGroup>

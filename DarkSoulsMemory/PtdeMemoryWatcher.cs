@@ -1,6 +1,8 @@
 ﻿using LiveSplit.ComponentUtil;
 using System;
 using System.Diagnostics;
+using DarkSoulsMemory.Util;
+using DarkSoulsMemory.Data;
 
 namespace DarkSoulsMemory {
     class PtdeMemoryWatcher : DarkSoulsMemoryWatcher {

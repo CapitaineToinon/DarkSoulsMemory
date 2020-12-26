@@ -2,6 +2,8 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
+using DarkSoulsMemory.Util;
+using DarkSoulsMemory.Data;
 
 namespace DarkSoulsMemory {
     public class DarkSouls
@@ -17,7 +19,7 @@ namespace DarkSoulsMemory {
 
         public delegate void IntChangedEventHandler(int old, int current);
         public delegate void FlagChangedEventHandler(int flag, bool old, bool current);
-        public delegate void BossDefeatedEventHandler(Static.Bosses boss);
+        public delegate void BossDefeatedEventHandler(Bosses boss);
         public delegate void ItemPickupEventHandler(int flag);
         public delegate void QuitoutEventHandler();
         public delegate void OnProcessHooked(Process process);
@@ -166,7 +168,7 @@ namespace DarkSoulsMemory {
 
                 if (!old && current || force && current)
                 {
-                    OnBossDefeated?.Invoke((Static.Bosses)flag);
+                    OnBossDefeated?.Invoke((Bosses)flag);
                 }
 
                 if (old != current || force)

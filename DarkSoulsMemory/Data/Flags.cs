@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DarkSoulsMemory {
+namespace DarkSoulsMemory.Data {
     public static class Flags {
 
         /// <summary>
         /// List of the bosses flag ID
         /// </summary>
-        public static readonly List<int> Bosses = Enum.GetValues(typeof(Static.Bosses)).Cast<int>().ToList();
+        public static readonly List<int> Bosses = Enum.GetValues(typeof(Bosses)).Cast<int>().ToList();
 
         public static int[] Items = {51000000, 51000010, 51000020, 51000030, 51000040, 51000050, 51000090, 51000100, 51000120, 51000140,
                                     51000170, 51000180, 51000190, 51000210, 51000240, 51000500, 51010000, 51010020, 51010040, 51010050,

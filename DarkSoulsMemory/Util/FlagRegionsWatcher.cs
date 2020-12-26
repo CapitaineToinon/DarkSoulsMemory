@@ -3,8 +3,9 @@ using System;
 using System.Linq;
 using System.Diagnostics;
 using System.Collections.Generic;
+using DarkSoulsMemory.Data;
 
-namespace DarkSoulsMemory {
+namespace DarkSoulsMemory.Util {
     /// <summary>
     /// A FlagRegion is a pointer to a int that is used as a bit field
     /// with the ids of all the flags in that region
