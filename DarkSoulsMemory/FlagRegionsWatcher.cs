@@ -57,6 +57,12 @@ namespace DarkSoulsMemory {
             }
         }
 
+        /// <summary>
+        /// Creates a FlagRegionsWatcher based on a list of flags
+        /// </summary>
+        /// <param name="flags"></param>
+        /// <param name="basePointer"></param>
+        /// <returns></returns>
         public static FlagRegionsWatcher From(List<int> flags, IntPtr basePointer)
         {
             var flagRegionWatcher = new FlagRegionsWatcher();

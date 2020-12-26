@@ -32,15 +32,15 @@ namespace DarkSoulsMemory {
             int val;
             var scanner = new SignatureScanner(process, process.MainModule.BaseAddress, process.MainModule.ModuleMemorySize);
 
-            IntPtr pChrClassBase;
-            if ((pChrClassBase = scanner.ScanRelative(CHR_CLASS_BASE.SigScan, CHR_CLASS_BASE.offset, CHR_CLASS_BASE.instructionSize)) == IntPtr.Zero)
+            IntPtr pChrClassBase = scanner.ScanRelative(CHR_CLASS_BASE.SigScan, CHR_CLASS_BASE.offset, CHR_CLASS_BASE.instructionSize);
+            if (pChrClassBase == IntPtr.Zero)
                 throw new NullReferenceException("Failed to Scan CHR_CLASS_BASE_AOB");
 
-            InGameTime = new MemoryWatcher<int>(new DeepPointer(pChrClassBase, 0xA4));
-
-            IntPtr pFlags;
-            if ((pFlags = scanner.ScanRelative(FLAGS.SigScan, FLAGS.offset, FLAGS.instructionSize)) == IntPtr.Zero)
+            IntPtr pFlags = scanner.ScanRelative(FLAGS.SigScan, FLAGS.offset, FLAGS.instructionSize);
+            if (pFlags == IntPtr.Zero)
                 throw new NullReferenceException("Failed to Scan FLAGS");
+
+            InGameTime = new MemoryWatcher<int>(new DeepPointer(pChrClassBase, 0xA4));
 
             new DeepPointer(pFlags, 0).Deref(process, out val);
             pFlags = new IntPtr(val);

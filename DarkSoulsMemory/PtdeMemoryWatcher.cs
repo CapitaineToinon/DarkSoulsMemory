@@ -16,16 +16,16 @@ namespace DarkSoulsMemory {
             int val;
             var scanner = new SignatureScanner(process, process.MainModule.BaseAddress, process.MainModule.ModuleMemorySize);
 
-            IntPtr pCharData;
-            if ((pCharData = scanner.Scan(CHAR_DATA)) == IntPtr.Zero)
+            IntPtr pCharData = scanner.Scan(CHAR_DATA);
+            if (pCharData == IntPtr.Zero)
                 throw new NullReferenceException("Failed to Scan CHAR_DATA");
 
-            IntPtr pCurrentSaveSlot;
-            if ((pCurrentSaveSlot = scanner.Scan(CURRENT_SAVE_SLOT)) == IntPtr.Zero)
+            IntPtr pCurrentSaveSlot = scanner.Scan(CURRENT_SAVE_SLOT);
+            if (pCurrentSaveSlot == IntPtr.Zero)
                 throw new NullReferenceException("Failed to Scan CURRENT_SAVE_SLOT");
 
-            IntPtr pFlags;
-            if ((pFlags = scanner.Scan(FLAGS)) == IntPtr.Zero)
+            IntPtr pFlags = scanner.Scan(FLAGS);
+            if (pFlags == IntPtr.Zero)
                 throw new NullReferenceException("Failed to Scan FLAGS");
 
             InGameTime = new MemoryWatcher<int>(new DeepPointer(pCharData, 0x0, 0x68));
