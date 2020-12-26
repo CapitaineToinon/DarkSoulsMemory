@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30225.117
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DarkSoulsMemory", "DarkSoulsMemory.csproj", "{9122B1CA-7318-473B-948B-16FD09C83616}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingApp", "..\TestingApp\TestingApp.csproj", "{5076C5AA-A191-4A85-B5DB-53160E7AF59B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9122B1CA-7318-473B-948B-16FD09C83616}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9122B1CA-7318-473B-948B-16FD09C83616}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9122B1CA-7318-473B-948B-16FD09C83616}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9122B1CA-7318-473B-948B-16FD09C83616}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5076C5AA-A191-4A85-B5DB-53160E7AF59B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5076C5AA-A191-4A85-B5DB-53160E7AF59B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5076C5AA-A191-4A85-B5DB-53160E7AF59B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5076C5AA-A191-4A85-B5DB-53160E7AF59B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {57A69AD7-31AE-4AED-A948-4E8A2B7F1A6D}
+	EndGlobalSection
+EndGlobal
