@@ -6,7 +6,7 @@ using DarkSoulsMemory;
 
 namespace TestingApp {
     class Program {
-        static Dictionary<Static.Bosses, bool> bosses = Enum.GetValues(typeof(Static.Bosses)).Cast<Static.Bosses>().ToDictionary(key => key, key => false);
+        static readonly Dictionary<Static.Bosses, bool> bosses = Enum.GetValues(typeof(Static.Bosses)).Cast<Static.Bosses>().ToDictionary(key => key, key => false);
 
         static void Main(string[] args)
         {

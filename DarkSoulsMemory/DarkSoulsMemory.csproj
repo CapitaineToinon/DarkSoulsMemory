@@ -47,7 +47,8 @@
   <ItemGroup>
     <Compile Include="DarkSouls.cs" />
     <Compile Include="DarkSoulsMemoryWatcher.cs" />
-    <Compile Include="Data.cs" />
+    <Compile Include="SignatureScanner.cs" />
+    <Compile Include="Static.cs" />
     <Compile Include="DsrMemoryWatcher.cs" />
     <Compile Include="FlagRegionsWatcher.cs" />
     <Compile Include="Flags.cs" />
